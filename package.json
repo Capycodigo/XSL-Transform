@@ -1,0 +1,53 @@
+{
+  "name": "xsl-transform",
+  "displayName": "XSL Transform",
+  "description": "Simple extension to transform XML + XSL",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.115.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "xsl-transform.helloWorld",
+        "title": "XSL: Transform XML to HTML",
+        "category": "XML Tools"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "xsl-transform.helloWorld",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.115.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "dependencies": {
+    "saxon-js": "^2.7.0"
+  }
+}
