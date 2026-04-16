@@ -3,7 +3,7 @@
   "displayName": "XML XSLT Transformer",
   "description": "Transform XML documents using XSLT. Supports XSLT 1.0+ transformations with automatic output format detection.",
   "version": "0.0.1",
-  "publisher": "capycodigo",
+  "publisher": "capycode",
   "license": "MIT",
   "repository": "https://github.com/Capycodigo/XSL-Transform",
   "icon": "images/icon.png",
