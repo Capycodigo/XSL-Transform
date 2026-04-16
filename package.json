@@ -1,28 +1,33 @@
 {
-  "name": "xsl-transform",
-  "displayName": "XSL Transform",
-  "description": "Simple extension to transform XML + XSL",
+  "name": "xml-xslt-transformer",
+  "displayName": "XML XSLT Transformer",
+  "description": "Transform XML documents using XSLT. Supports XSLT 1.0+ transformations with automatic output format detection.",
   "version": "0.0.1",
+  "license": "MIT",
+  "repository": "https://github.com/Capycodigo/XSL-Transform",
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.115.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:xml"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "xsl-transform.helloWorld",
-        "title": "XSL: Transform XML to HTML",
+        "command": "xml-xslt-transformer.runTransform",
+        "title": "XSL: Transform XML",
         "category": "XML Tools"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "xsl-transform.helloWorld",
+          "command": "xml-xslt-transformer.runTransform",
           "when": "resourceExtname == .xml",
           "group": "navigation"
         }
@@ -38,8 +43,9 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
+    "@types/node": "^22.19.17",
     "@types/vscode": "^1.115.0",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2",
@@ -48,6 +54,6 @@
     "typescript-eslint": "^8.56.1"
   },
   "dependencies": {
-    "saxon-js": "^2.7.0"
+    "xslt-processor": "^5.0.7"
   }
 }

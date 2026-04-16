@@ -1,71 +1,133 @@
-# xsl-transform README
+# XML XSLT Transformer
 
-This is the README for your extension "xsl-transform". After writing up a brief description, we recommend including the following sections.
+A powerful VS Code extension to transform XML documents using XSLT. No Java/JAR dependencies required - everything runs in Node.js with the xslt-processor library for reliable XSLT transformation.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* 🚀 **No Java Required**: Uses Node.js instead of Java for fast transformations
+* 📄 **Multiple Output Formats**: Supports HTML, XML, XHTML, Text, JSON, and Adaptive output methods
+* 🔍 **Smart XSL Detection**: Automatically finds XSL files via XML processing instructions or filename matching
+* 🎨 **Auto-Formatting**: Beautifies output for better readability
+* 🖱️ **Context Menu Integration**: Right-click on XML files for quick access
+* ⚡ **Fast & Lightweight**: Minimal footprint with instant transformations
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Download the `.vsix` file from the [Releases](https://github.com/Capycodigo/XSL-Transform/releases) page
+2. In VS Code: `Extensions > Install from VSIX...` or drag the file into the editor
+3. Reload VS Code
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
+
+### Method 1: Command Palette
+1. Open an XML file in VS Code
+2. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
+3. Type "XSL: Transform XML" and select it
+
+### Method 2: Context Menu
+1. Right-click on an open XML file
+2. Select "XSL: Transform XML" from the context menu
+
+## How It Works
+
+1. **XSL Detection**: The extension looks for XSL references in XML `<?xml-stylesheet?>` processing instructions
+2. **Fallback**: If no reference found, it searches for a same-name `.xsl` file in the same directory
+3. **Transformation**: Uses the `xslt-processor` library for reliable XSLT 1.0+ processing
+4. **Output**: Saves the result with appropriate extension based on XSL output method
+
+## Output Formats
+
+The extension automatically detects the output format from your XSL:
+
+| XSL Output Method | File Extension | Description |
+|-------------------|----------------|-------------|
+| `html` | `.html` | HTML document |
+| `xhtml` | `.xhtml` | XHTML document |
+| `xml` | `.xml` | XML document |
+| `text` | `.txt` | Plain text |
+| `json` | `.json` | JSON data |
+| `adaptive` | `.html` | Adaptive (defaults to HTML) |
+
+## Example
+
+### XML File (data.xml)
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="transform.xsl"?>
+<books>
+  <book id="1">
+    <title>XML Guide</title>
+    <author>John Doe</author>
+  </book>
+</books>
+```
+
+### XSL File (transform.xsl)
+```xml
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <html>
+      <body>
+        <h1>Book List</h1>
+        <ul>
+          <xsl:for-each select="books/book">
+            <li><xsl:value-of select="title"/> by <xsl:value-of select="author"/></li>
+          </xsl:for-each>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+```
+
+### Output (data.html)
+```html
+<html>
+  <body>
+    <h1>Book List</h1>
+    <ul>
+      <li>XML Guide by John Doe</li>
+    </ul>
+  </body>
+</html>
+```
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code 1.115.0 or later
+- Local XML and XSL files
 
-## Extension Settings
+## Contributing
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Contributions are welcome! Please:
 
-For example:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-This extension contributes the following settings:
+## License
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Known Issues
+## Support
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+If you encounter issues or have questions:
+- Check the [Issues](https://github.com/Capycodigo/XSL-Transform/issues) page
+- Create a new issue with detailed information
+- Include sample XML/XSL files if possible
+
+## Notes
+
+* The extension uses the `xslt-processor` npm package.
+* No Java or external processor is required.
+* If no stylesheet instruction is present and no same-name XSL file exists, the extension will report the missing XSL file.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+* Initial public version with XML/XSL transformation support.
